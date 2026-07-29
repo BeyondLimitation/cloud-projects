@@ -10,7 +10,7 @@ resource "aws_cloudfront_distribution" "static-website-sre" {
       https_port = 443
       # S3 Website는 'http'만 지원
       origin_protocol_policy = "http-only"
-      origin_ssl_protocols = "TLSv1.2"
+      origin_ssl_protocols = [ "TLSv1.2" ]
     }
   }
   origin {
@@ -23,7 +23,7 @@ resource "aws_cloudfront_distribution" "static-website-sre" {
       https_port = 443
       # S3 Website는 'http'만 지원
       origin_protocol_policy = "http-only"
-      origin_ssl_protocols = "TLSv1.2"
+      origin_ssl_protocols = [ "TLSv1.2" ]
     }
   }
 
