@@ -1,3 +1,10 @@
+# CloudFront의 요청 URL에 Prefix 제거
+resource "aws_cloudfront_function" "remove_prefix" {
+  name = "remove_prefix"
+  code = file("cloudfront_functions/default.js")
+  runtime = "cloudfront-js-2.0"
+}
+
 resource "aws_cloudfront_distribution" "static-website-sre" {
   # S3 Origin 지정
   origin {
@@ -61,6 +68,11 @@ resource "aws_cloudfront_distribution" "static-website-sre" {
 
     viewer_protocol_policy = "redirect-to-https"
     cache_policy_id        = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    # S3 요청에 'dev' prefix를 제거
+    function_association {
+      event_type = "viewer-request"
+      function_arn = aws_cloudfront_function.remove_prefix.arn
+    }
   }
 
   # Distribution이 End user의 컨텐츠 요청 허용 여부
