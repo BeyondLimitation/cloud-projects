@@ -58,7 +58,7 @@ jobs:
         run: terraform validate -no-color
 
       - name: Terraform Plan
-        run: terraform plan -out ${{ env.PLAN_FILE_NAME }} -var-file ${{ env.TERRAFORM_ENV_FILE }} -no-color
+        run: terraform plan -out ${{ env.PLAN_FILE_NAME }} -var-file ${{ env.TERRAFORM_ENV_FILE }} -var email_address=${{ secrets.EMAIL_ADDRESS }} -no-color
 
       - name: Terraform Apply
         run: terraform apply ${{ env.PLAN_FILE_NAME }}
