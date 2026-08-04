@@ -1,7 +1,7 @@
 # CloudFront의 요청 URL에 Prefix 제거
 resource "aws_cloudfront_function" "remove_prefix" {
-  name = "remove_prefix"
-  code = file("cloudfront_functions/default.js")
+  name    = "remove_prefix"
+  code    = file("cloudfront_functions/default.js")
   runtime = "cloudfront-js-2.0"
 }
 
@@ -13,11 +13,11 @@ resource "aws_cloudfront_distribution" "static-website-sre" {
     origin_id   = "dev"
     # S3 Website용 Origin 설정
     custom_origin_config {
-      http_port = 80
+      http_port  = 80
       https_port = 443
       # S3 Website는 'http'만 지원
       origin_protocol_policy = "http-only"
-      origin_ssl_protocols = [ "TLSv1.2" ]
+      origin_ssl_protocols   = ["TLSv1.2"]
     }
   }
   origin {
@@ -26,11 +26,11 @@ resource "aws_cloudfront_distribution" "static-website-sre" {
     origin_id   = "prod"
     # S3 Website용 Origin 설정
     custom_origin_config {
-      http_port = 80
+      http_port  = 80
       https_port = 443
       # S3 Website는 'http'만 지원
       origin_protocol_policy = "http-only"
-      origin_ssl_protocols = [ "TLSv1.2" ]
+      origin_ssl_protocols   = ["TLSv1.2"]
     }
   }
 
@@ -70,7 +70,7 @@ resource "aws_cloudfront_distribution" "static-website-sre" {
     cache_policy_id        = "658327ea-f89d-4fab-a63d-7e88639e58f6"
     # S3 요청에 'dev' prefix를 제거
     function_association {
-      event_type = "viewer-request"
+      event_type   = "viewer-request"
       function_arn = aws_cloudfront_function.remove_prefix.arn
     }
   }

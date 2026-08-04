@@ -18,3 +18,9 @@ variable "prod-s3_bucket_regional_domain_name" {
     error_message = "잘못된 FQDN 형식 입니다. 다시 확인해 주십시요."
   }
 }
+
+# SNS
+variable "email_address" {
+  type        = string
+  description = "CloudWatch Alarm을 받을 Email 주소. Github Secret에서 값을 가져오기"
+}

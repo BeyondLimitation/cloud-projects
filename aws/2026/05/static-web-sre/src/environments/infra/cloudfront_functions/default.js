@@ -2,9 +2,11 @@ function handler(event) {
     var request = event.request;
     var uri = request.uri;
 
-    // 1. '/dev' Prefix 제거
-    // 예: /dev/about -> /about, /dev/css/style.css -> /css/style.css
-    if (uri.startsWith('/dev')) {
+    // 1. '/dev' 또는 '/dev/' 로 시작하는 경우 prefix 제거
+    // /dev -> "" 
+    // /dev/ -> "/"
+    // /dev/about -> "/about"
+    if (uri === '/dev' || uri.startsWith('/dev/')) {
         uri = uri.replace(/^\/dev/, '');
     }
 
