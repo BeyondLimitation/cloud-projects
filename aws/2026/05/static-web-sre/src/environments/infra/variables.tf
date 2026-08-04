@@ -23,4 +23,5 @@ variable "prod-s3_bucket_regional_domain_name" {
 variable "email_address" {
   type        = string
   description = "CloudWatch Alarm을 받을 Email 주소. Github Secret에서 값을 가져오기"
+  default = ""
 }
