@@ -17,6 +17,8 @@ env:
   ROLE_ARN: arn:aws:iam::345003923266:role/github_action-infra_branch
   BUCKET_NAME: lee-static-web-sre-prod
   WORKING_DIR: aws/2026/05/static-web-sre/src/environments/infra/
+  PLAN_FILE_NAME: sns-deploy
+  TERRAFORM_ENV_FILE: infra.tfvars
 
 jobs:
   start-deploy:
@@ -56,7 +58,7 @@ jobs:
         run: terraform validate -no-color
 
       - name: Terraform Plan
-        run: terraform plan -out cloudfront-deploy -var-file infra.tfvars -no-color
+        run: terraform plan -out ${{ env.PLAN_FILE_NAME }} -var-file ${{ env.TERRAFORM_ENV_FILE }} -no-color
 
       - name: Terraform Apply
-        run: terraform apply cloudfront-deploy
+        run: terraform apply ${{ env.PLAN_FILE_NAME }}
