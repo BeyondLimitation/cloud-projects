@@ -11,7 +11,7 @@ resource "aws_sns_topic_subscription" "via_email" {
 
 # CloudWatch Alarm 설정
 resource "aws_cloudwatch_metric_alarm" "budget_alarm" {
-  
+  provider = aws.virginia
   # Alarm 기본 설정
   alarm_name         = var.alarm_name
   alarm_description  = "CloudFront 5XX 에러 건수가 최근 30일 기간에 6건 이상 발생했습니다."
