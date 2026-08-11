@@ -14,10 +14,11 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
+  AWS_DEFAULT_REGION: us-east-1
   ROLE_ARN: arn:aws:iam::345003923266:role/github_action-infra_branch
   BUCKET_NAME: lee-static-web-sre-prod
   WORKING_DIR: aws/2026/05/static-web-sre/src/environments/infra/
-  PLAN_FILE_NAME: sns-deploy
+  PLAN_FILE_NAME: cloudwatch-deploy
   TERRAFORM_ENV_FILE: infra.tfvars
 
 jobs:
