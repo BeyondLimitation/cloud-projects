@@ -46,6 +46,9 @@ jobs:
         with:
           terraform_version: "1.15.4"
 
+      - name: Show AWS Region
+        run: aws configure get region
+
       - name: Terraform init
         run: terraform init -no-color
 
