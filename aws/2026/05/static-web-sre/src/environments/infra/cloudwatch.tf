@@ -12,13 +12,13 @@ resource "aws_sns_topic_subscription" "via_email" {
 # Cloudwatch를 위한 Region 설정
 provider "aws" {
   region = "us-east-1"
-  alias  = "us_east_1"
+  alias  = "virginia"
 }
 
 # CloudWatch Alarm 설정
 resource "aws_cloudwatch_metric_alarm" "budget_alarm" {
   # Region 설정
-  provider = aws.us_east_1
+  provider = aws.virginia
   
   # Alarm 기본 설정
   alarm_name         = var.alarm_name
@@ -39,7 +39,7 @@ resource "aws_cloudwatch_metric_alarm" "budget_alarm" {
   # CloudFront Distribution ID 지정
   dimensions = {
     DistributionId = var.cloudfront_distribution_id
-    Region         = "us-east-1"
+    Region         = "Global"
   }
 
   # 임계치 초과 시 알림을 보낼 SNS Topic
