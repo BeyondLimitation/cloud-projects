@@ -1,4 +1,4 @@
-name: Deploy Infra
+name: Test Access
 
 on:
   push:
@@ -32,6 +32,13 @@ jobs:
       # Git 저장소 가져오기
       - name: Checkout repository
         uses: actions/checkout@v7
+
+      # 현재 사용중인 IAM Role 보여주기. AWS CLI 설정
+      - name: Show IAM Role
+        uses: ./.github/actions/show-iam-role
+        with:
+          role-arn: ${{ env.ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
 
       # Terraform 작업
       - name: Terraform Setup
