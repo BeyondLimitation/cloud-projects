@@ -29,9 +29,9 @@ resource "aws_cloudwatch_metric_alarm" "name" {
 
   # 조건 설정
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  period              = 2592000
+  period              = 86400
   statistic           = "Sum"
-  threshold           = 6
+  threshold           = 0.1
 
   # 오작동 방지 설정. 데이터 없는 경우
   treat_missing_data = "notBreaching"
