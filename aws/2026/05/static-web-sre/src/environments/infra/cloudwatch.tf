@@ -9,12 +9,6 @@ resource "aws_sns_topic_subscription" "via_email" {
   endpoint  = var.email_address
 }
 
-# Cloudwatch를 위한 Region 설정
-provider "aws" {
-  alias  = "virginia"
-  region = "us-east-1"
-}
-
 # CloudWatch Alarm 설정
 resource "aws_cloudwatch_metric_alarm" "budget_alarm" {
   # Region 설정
