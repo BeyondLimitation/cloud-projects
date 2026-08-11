@@ -1,4 +1,4 @@
-name: Test Access
+name: Deploy Infra
 
 on:
   push:
@@ -32,19 +32,6 @@ jobs:
       # Git 저장소 가져오기
       - name: Checkout repository
         uses: actions/checkout@v7
-
-      # 현재 사용중인 IAM Role 보여주기
-      - name: Show IAM Role
-        uses: ./.github/actions/show-iam-role
-        with:
-          role-arn: ${{ env.ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      # S3 State 저장용 Bucket 접근 테스트
-      - name: Check Access
-        uses: ./.github/actions/s3-access-test
-        with:
-          bucket_name: ${{ env.BUCKET_NAME }}
 
       # Terraform 작업
       - name: Terraform Setup
