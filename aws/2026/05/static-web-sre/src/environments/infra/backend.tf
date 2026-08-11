@@ -5,9 +5,3 @@ terraform {
     region = "ap-northeast-2"
   }
 }
-
-# Cloudwatch를 위한 Region 설정
-provider "aws" {
-  alias  = "virginia"
-  region = "us-east-1"
-}
