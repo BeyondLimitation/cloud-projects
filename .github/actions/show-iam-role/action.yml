@@ -25,3 +25,8 @@ runs:
       shell: bash
       run: |
         aws sts get-caller-identity
+
+    - name: Show AWS Region
+      shell: bash
+      run: |
+        aws configure get region
