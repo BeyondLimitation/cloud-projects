@@ -8,4 +8,8 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
+
+  endpoints {
+    cloudwatch = "https://monitoring.us-east-1.amazonaws.com"
+  }
 }
