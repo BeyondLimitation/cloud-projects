@@ -1,5 +1,6 @@
 # CloudWatch가 이메일로 경고를 보내기 위해 설정
 resource "aws_sns_topic" "error-budget" {
+  provider = aws.virginia
   name = "static-web-sre-5XX_error_budget"
 }
 
@@ -36,4 +37,7 @@ resource "aws_cloudwatch_metric_alarm" "budget_alarm" {
 
   # 임계치 초과 시 알림을 보낼 SNS Topic
   alarm_actions = [aws_sns_topic.error-budget.arn]
+
+  # SNS Topic의 생성 대기
+  depends_on = [ aws_sns_topic.error-budget ]
 }
