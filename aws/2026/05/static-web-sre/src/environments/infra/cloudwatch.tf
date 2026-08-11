@@ -11,8 +11,6 @@ resource "aws_sns_topic_subscription" "via_email" {
 
 # CloudWatch Alarm 설정
 resource "aws_cloudwatch_metric_alarm" "budget_alarm" {
-  # Region 설정
-  provider = aws.virginia
   
   # Alarm 기본 설정
   alarm_name         = var.alarm_name
