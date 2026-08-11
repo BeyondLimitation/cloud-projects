@@ -5,6 +5,8 @@ resource "aws_sns_topic" "error-budget" {
 }
 
 resource "aws_sns_topic_subscription" "via_email" {
+  provider = aws.virginia
+
   topic_arn = aws_sns_topic.error-budget.arn
   protocol  = "email"
   endpoint  = var.email_address
