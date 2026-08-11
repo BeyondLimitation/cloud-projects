@@ -8,6 +8,7 @@ resource "aws_sns_topic_subscription" "via_email" {
   topic_arn = aws_sns_topic.error-budget.arn
   protocol  = "email"
   endpoint  = var.email_address
+  depends_on = [ aws_sns_topic.error-budget ]
 }
 
 # CloudWatch Alarm 설정
