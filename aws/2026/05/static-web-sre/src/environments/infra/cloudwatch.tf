@@ -30,7 +30,7 @@ resource "aws_cloudwatch_metric_alarm" "budget_alarm" {
   # 조건 설정
   comparison_operator = "GreaterThanOrEqualToThreshold"
   period              = 86400
-  statistic           = "Sum"
+  statistic           = "Average"
   threshold           = 0.1
 
   # 오작동 방지 설정. 데이터 없는 경우
