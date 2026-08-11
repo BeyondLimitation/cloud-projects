@@ -39,7 +39,7 @@ resource "aws_cloudwatch_metric_alarm" "budget_alarm" {
   # CloudFront Distribution ID 지정
   dimensions = {
     DistributionId = var.cloudfront_distribution_id
-    Region         = "Global"
+    Region         = "us-east-1"
   }
 
   # 임계치 초과 시 알림을 보낼 SNS Topic
