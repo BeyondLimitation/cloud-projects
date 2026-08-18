@@ -50,7 +50,7 @@ jobs:
         run: terraform init -no-color
 
       - name: Terraform Apply
-        run: terraform apply -refresh-only -var-file ${{ env.TERRAFORM_ENV_FILE }} -var email_address=${{ secrets.EMAIL_ADDRESS }}
+        run: terraform apply -refresh-only -var-file ${{ env.TERRAFORM_ENV_FILE }} -var email_address=${{ secrets.EMAIL_ADDRESS }} -auto-approve
  
       - name: Get CloudFront Distribution Domain
         id: terraform-output
