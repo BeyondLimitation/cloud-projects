@@ -1,4 +1,4 @@
-name: Test Access
+name: Grafana K6 Test
 
 on:
   push:
@@ -13,16 +13,16 @@ permissions:
   contents: read
 
 env:
-  AWS_REGION: us-east-1
-  AWS_DEFAULT_REGION: us-east-1
+  AWS_REGION: ap-northeast-2
+  # AWS_DEFAULT_REGION: us-east-1
   ROLE_ARN: arn:aws:iam::345003923266:role/github_action-infra_branch
-  BUCKET_NAME: lee-static-web-sre-prod
+  # BUCKET_NAME: lee-static-web-sre-prod
   WORKING_DIR: aws/2026/05/static-web-sre/src/environments/infra/
-  PLAN_FILE_NAME: cloudwatch-deploy
-  TERRAFORM_ENV_FILE: infra.tfvars
+  # PLAN_FILE_NAME: cloudwatch-deploy
+  # TERRAFORM_ENV_FILE: infra.tfvars
 
 jobs:
-  deploy-test:
+  connection-test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,12 +48,15 @@ jobs:
 
       - name: Terraform init
         run: terraform init -no-color
+ 
+      - name: Get CloudFront Distribution Domain
+        id: terraform-output
+        run: |
+          CLOUDFRONT_DOMAIN=$(terraform output -raw cloudfront_domain_name)
 
-      - name: Terraform Validate
-        run: terraform validate -no-color
+          echo "CloudFront Domain: $CLOUDFRONT_DOMAIN"
+          echo "cloudfront_domain=$CLOUDFRONT_DOMAIN" >> "$GITHUB_OUTPUT"
 
-      - name: Terraform Plan
-        run: terraform plan -out ${{ env.PLAN_FILE_NAME }} -var-file ${{ env.TERRAFORM_ENV_FILE }} -var email_address=${{ secrets.EMAIL_ADDRESS }} -no-color
-
-      - name: Terraform Apply
-        run: terraform apply ${{ env.PLAN_FILE_NAME }}
+      # Grafana K6 작업 설정
+      - name: Setup Grafana K6
+        uses: grafana/setup-k6-action@v1.2.1
