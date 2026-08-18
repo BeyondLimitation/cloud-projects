@@ -49,11 +49,8 @@ jobs:
       - name: Terraform init
         run: terraform init -no-color
 
-      - name : Terraform Plan
-        run: terraform plan -out ${{ env.PLAN_FILE_NAME }} -var-file ${{ env.TERRAFORM_ENV_FILE }} -var email_address=${{ secrets.EMAIL_ADDRESS }}
-
       - name: Terraform Apply
-        run: terraform apply ${{ env.PLAN_FILE_NAME }}
+        run: terraform apply -refresh-only
  
       - name: Get CloudFront Distribution Domain
         id: terraform-output
