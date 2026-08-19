@@ -1,6 +1,5 @@
 import http from 'k6/http';
-import { check } from 'k6';
-import { Rate } from 'k6/metrics';
+import { Counter, Rate } from 'k6/metrics';
 
 // 1. 상태 코드 그룹별 비율(%) 메트릭
 export const rate2xx = new Rate('http_req_2xx_rate');
