@@ -20,6 +20,8 @@ export const options = {
     { duration: '1m', target: 20 },  // 1분간 유지
     { duration: '30s', target: 0 },  // 30초 동안 감축
   ],
+  // 테스트 종료 후 잔여 요청 정리 대기시간 단축 (기본 30초 -> 5초)
+  gracefulStop: '5s',
   // 가장 중요한 5xx 에러율 검증 설정 (임계치)
   thresholds: {
     // 전체 요청 중 5xx 에러 발생률이 0.1%(0.001) 미만이어야 성공
@@ -31,7 +33,7 @@ export default function () {
   // GitHub Actions에서 주입해줄 Target URL (없을 경우 기본값 사용)
   const targetUrl = __ENV.TARGET_URL || 'http://localhost';
   
-  const res = http.get(targetUrl);
+  const res = http.get(`https://${targetUrl}`);
 
   // 2xx, 3xx, 4xx, 5xx 상태 분류
   const is2xx = status >= 200 && status < 300;
