@@ -71,3 +71,4 @@ jobs:
           TARGET_URL: ${{ steps.terraform-output.outputs.cloudfront_domain }}
         with:
           path: ${{ env.WORKING_DIR }}/tests/response.js
+          flags: --quiet
