@@ -70,4 +70,4 @@ jobs:
         env:
           TARGET_URL: ${{ steps.terraform-output.outputs.cloudfront_domain }}
         with:
-          path: ./tests/response.js
+          path: ${{ env.WORKING_DIR }}/tests/response.js
